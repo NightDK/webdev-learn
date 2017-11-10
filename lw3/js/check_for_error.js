@@ -1,8 +1,8 @@
-function registration(event) {
-  
-  var Email = $(".input-log");
-  var Password = $(".input-pass");
-  var PasswordCheck = $(".input-pass-check");
+$(".registration").submit(function(event) {
+
+  var Email = $(".input-log").val();
+  var Password = $(".input-pass").val();
+  var PasswordCheck = $(".input-pass-check").val();
   var Check = $(".check_input").prop("checked");
   var errorMsg = "null";
 
@@ -13,7 +13,7 @@ function registration(event) {
     error();
     event.preventDefault();
   }
-}
+});
 
 function validate(Email, Password, PasswordCheck, Check) {
   if (!validEmail(Email)) {
@@ -40,18 +40,18 @@ function validate(Email, Password, PasswordCheck, Check) {
 }
 
 function validEmail(Email) {
-  var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
-  return pattern.test(Email);
+  var pattern = Email.match(/^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i);
+  return pattern;
 }
 
 function success() {
-  alert('Вы успешно зарегистрировались.');
+  alert("Вы успешно зарегистрировались.");
 }
 
 function error() {
   alert(errorMsg);
 }
 
-$(document).ready = (function() {
-  $('login-page').on('submit', registration);
+$(document).ready = (function () {
+  $('registration').on('submit', registration);
 });
