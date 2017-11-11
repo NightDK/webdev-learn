@@ -1,4 +1,10 @@
-$(".registration").submit(function(event) {
+$(document).ready = (function () {
+  $('#registration').on('submit', registration);
+});
+
+$("#registration").submit(function (event) {
+
+  event.preventDefault();
 
   var Email = $(".input-log").val();
   var Password = $(".input-pass").val();
@@ -8,10 +14,8 @@ $(".registration").submit(function(event) {
 
   if (validate(Email, Password, PasswordCheck, Check)) {
     success();
-  }
-  else {
+  } else {
     error();
-    event.preventDefault();
   }
 });
 
@@ -51,7 +55,3 @@ function success() {
 function error() {
   alert(errorMsg);
 }
-
-$(document).ready = (function () {
-  $('registration').on('submit', registration);
-});
