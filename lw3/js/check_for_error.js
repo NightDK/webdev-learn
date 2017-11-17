@@ -1,14 +1,14 @@
 var errorMsg = null;
 
 function registration(event) {
-  
+
   event.preventDefault();
-  
+
   var Email = document.getElementsByClassName('input-log')[0].value;
   var Password = document.getElementsByClassName('input-pass')[0].value;
   var PasswordCheck = document.getElementsByClassName('input-pass-check')[0].value;
   var Check = document.getElementsByClassName('check')[0].checked;
-  
+
   if (validate(Email, Password, PasswordCheck, Check)) {
     success();
   }
@@ -54,6 +54,6 @@ function error() {
   alert(errorMsg);
 }
 
-window.onload = function() {
+window.onload = function () {
   document.getElementById('login-page').addEventListener('submit', registration);
 }
