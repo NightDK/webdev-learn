@@ -1,6 +1,4 @@
-$(document).ready = (function () {
-  $('#registration').on('submit', registration);
-});
+var errorMsg = null;
 
 $("#registration").submit(function (event) {
 
@@ -10,7 +8,6 @@ $("#registration").submit(function (event) {
   var Password = $(".input-pass").val();
   var PasswordCheck = $(".input-pass-check").val();
   var Check = $(".check_input").prop("checked");
-  var errorMsg = "null";
 
   if (validate(Email, Password, PasswordCheck, Check)) {
     success();
@@ -55,3 +52,7 @@ function success() {
 function error() {
   alert(errorMsg);
 }
+
+$(document).ready = (function () {
+  $('#registration').on('submit', registration);
+});
