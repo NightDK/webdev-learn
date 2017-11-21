@@ -1,20 +1,21 @@
-function registration(event) {
+var errorMsg = null;
+
+$("#registration").submit(function (event) {
 
   event.preventDefault();
 
-  var email = document.getElementsByClassName('input-log')[0].value;
-  var password = document.getElementsByClassName('input-pass')[0].value;
-  var passwordCheck = document.getElementsByClassName('input-pass-check')[0].value;
-  var check = document.getElementsByClassName('check')[0].checked;
+  var email = $(".input-log").val();
+  var password = $(".input-pass").val();
+  var passwordCheck = $(".input-pass-check").val();
+  var check = $(".check_input").prop("checked");
   var validateResult = validate(email, password, passwordCheck, check);
 
-  if (validateResult == true) { 
-    alert('Вы успешно зарегистрировались.');
-  }
-  else {
+  if (validateResult == true) {
+    alert("Вы успешно зарегистрировались.");
+  } else {
     alert(validateResult);
   }
-}
+});
 
 function validate(email, password, passwordCheck, check) {
   if (!validEmail(email)) {
@@ -37,10 +38,10 @@ function validate(email, password, passwordCheck, check) {
 }
 
 function validEmail(Email) {
-  var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
-  return pattern.test(Email);
+  var pattern = Email.match(/^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i);
+  return pattern;
 }
 
-window.onload = function () {
-  document.getElementById('login-page').addEventListener('submit', registration);
-}
+$(document).ready = (function () {
+  $('#registration').on('submit', registration);
+});
