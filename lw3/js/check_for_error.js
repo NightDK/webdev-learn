@@ -4,37 +4,34 @@ $("#registration").submit(function (event) {
 
   event.preventDefault();
 
-  var Email = $(".input-log").val();
-  var Password = $(".input-pass").val();
-  var PasswordCheck = $(".input-pass-check").val();
-  var Check = $(".check_input").prop("checked");
+  var email = $(".input-log").val();
+  var password = $(".input-pass").val();
+  var passwordCheck = $(".input-pass-check").val();
+  var check = $(".check_input").prop("checked");
+  var validateResult = validate(email, password, passwordCheck, check);
 
-  if (validate(Email, Password, PasswordCheck, Check)) {
-    success();
+  if (validateResult == true) {
+    alert("Вы успешно зарегистрировались.");
   } else {
-    error();
+    alert(validateResult);
   }
 });
 
-function validate(Email, Password, PasswordCheck, Check) {
-  if (!validEmail(Email)) {
-    errorMsg = 'Введите корректный email!';
-    return false;
+function validate(email, password, passwordCheck, check) {
+  if (!validEmail(email)) {
+    return 'Введите корректный email!';
   }
 
-  if (Password.length < 6) {
-    errorMsg = 'Длина пароля должна составлять более 6 символов';
-    return false;
+  if (password.length < 6) {
+    return 'Длина пароля должна составлять более 6 символов';
   }
 
-  if (Password !== PasswordCheck) {
-    errorMsg = 'Пароли не совпадают!';
-    return false;
+  if (password !== passwordCheck) {
+    return 'Пароли не совпадают!';
   }
 
-  if (!Check) {
-    errorMsg = 'Вы не согласны с правилами сайта!';
-    return false;
+  if (!check) {
+    return 'Вы не согласны с правилами сайта!';
   }
 
   return true;
@@ -43,14 +40,6 @@ function validate(Email, Password, PasswordCheck, Check) {
 function validEmail(Email) {
   var pattern = Email.match(/^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i);
   return pattern;
-}
-
-function success() {
-  alert("Вы успешно зарегистрировались.");
-}
-
-function error() {
-  alert(errorMsg);
 }
 
 $(document).ready = (function () {
