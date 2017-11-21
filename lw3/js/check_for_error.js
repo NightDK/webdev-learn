@@ -1,41 +1,36 @@
-var errorMsg = null;
-
 function registration(event) {
 
   event.preventDefault();
 
-  var Email = document.getElementsByClassName('input-log')[0].value;
-  var Password = document.getElementsByClassName('input-pass')[0].value;
-  var PasswordCheck = document.getElementsByClassName('input-pass-check')[0].value;
-  var Check = document.getElementsByClassName('check')[0].checked;
+  var email = document.getElementsByClassName('input-log')[0].value;
+  var password = document.getElementsByClassName('input-pass')[0].value;
+  var passwordCheck = document.getElementsByClassName('input-pass-check')[0].value;
+  var check = document.getElementsByClassName('check')[0].checked;
+  var validateResult = validate(email, password, passwordCheck, check);
 
-  if (validate(Email, Password, PasswordCheck, Check)) {
-    success();
+  if (validateResult == true) { 
+    alert('Вы успешно зарегистрировались.');
   }
   else {
-    error();
+    alert(validateResult);
   }
 }
 
-function validate(Email, Password, PasswordCheck, Check) {
-  if (!validEmail(Email)) {
-    errorMsg = 'Введите корректный email!';
-    return false;
+function validate(email, password, passwordCheck, check) {
+  if (!validEmail(email)) {
+    return 'Введите корректный email!';
   }
 
-  if (Password.length < 6) {
-    errorMsg = 'Длина пароля должна составлять более 6 символов';
-    return false;
+  if (password.length < 6) {
+    return 'Длина пароля должна составлять более 6 символов';
   }
 
-  if (Password !== PasswordCheck) {
-    errorMsg = 'Пароли не совпадают!';
-    return false;
+  if (password !== passwordCheck) {
+    return 'Пароли не совпадают!';
   }
 
-  if (!Check) {
-    errorMsg = 'Вы не согласны с правилами сайта!';
-    return false;
+  if (!check) {
+    return 'Вы не согласны с правилами сайта!';
   }
 
   return true;
@@ -44,14 +39,6 @@ function validate(Email, Password, PasswordCheck, Check) {
 function validEmail(Email) {
   var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
   return pattern.test(Email);
-}
-
-function success() {
-  alert('Вы успешно зарегистрировались.');
-}
-
-function error() {
-  alert(errorMsg);
 }
 
 window.onload = function () {
