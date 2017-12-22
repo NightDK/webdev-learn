@@ -1,5 +1,3 @@
-var errorMsg = null;
-
 $("#registration").submit(function (event) {
 
   event.preventDefault();
