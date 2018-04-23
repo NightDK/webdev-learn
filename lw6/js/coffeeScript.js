@@ -1,12 +1,12 @@
 function CoffeeMachine() {
-    this.moneyCash;
-    this.coffeeMenu = [
-      { id: 'Американо', price: 10 },
-      { id: 'Латте', price: 15 },
-      { id: 'Каппучино', price: 20 },
-    ];
-    this.selectCoffeeNumber;
-}
+  this.moneyCash;
+  this.coffeeMenu = [
+    { id: 'Американо', price: 10 },
+    { id: 'Латте', price: 15 },
+    { id: 'Каппучино', price: 20 },
+  ];
+  this.selectCoffeeNumber;
+
   this.setCash = function (money) {
     if (typeof money == 'number') {
       if (money <= 0) {
@@ -44,3 +44,13 @@ function CoffeeMachine() {
     }
     return false;
   }
+
+  this.getRemainCash = function () {
+    if (typeof this.selectCoffeeNumber == 'number' && typeof this.moneyCash == 'number'){
+      backMoney = this.moneyCash - this.coffeeMenu[this.selectCoffeeNumber].price;
+      console.log('Ваша сдача: ' + backMoney);
+      return backMoney;
+    }
+    return false;
+  }
+}
