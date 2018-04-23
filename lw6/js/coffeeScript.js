@@ -27,3 +27,20 @@ function CoffeeMachine() {
     console.log(menu);
     return menu;
   }
+
+  this.chooseCoffee = function (coffeeNumber) {
+    if (typeof coffeeNumber == 'number') {
+      if (coffeeNumber >= 1 && coffeeNumber < this.coffeeNumber.length + 1) {
+        if (this.moneyCash >= this.coffeeNumber[coffeeNumber - 1].price){
+          console.log('choosed ' + coffeeNumber);
+          this.selectCoffeeNumber = coffeeNumber - 1;
+          return true;
+        }
+        console.log('Нужно больше золота!');
+        return false;
+      }
+      console.log('Эй куда жмёшь? Нет такой кнопки!');
+      return false;
+    }
+    return false;
+  }
