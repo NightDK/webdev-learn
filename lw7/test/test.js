@@ -59,33 +59,33 @@ describe("coffeeMachine", function() {
         var coffeeMachine = new CoffeeMachine();
         expect(coffeeMachine.returnCash()).to.equal(false);
       });
-      it("coffee not installed", function() {
+      it("coffee is not entered", function() {
         var coffeeMachine = new CoffeeMachine();
         coffeeMachine.setCash(30);
         expect(coffeeMachine.returnCash()).to.equal(false);
       });
   
-      it("money not installed", function() {
+      it("money is not entered", function() {
         var coffeeMachine = new CoffeeMachine();
         coffeeMachine.chooseCoffee(1);
         expect(coffeeMachine.returnCash()).to.equal(false);
       });
   
-      it("coffee and more money installed", function() {
+      it("coffee and more money entered", function() {
         var coffeeMachine = new CoffeeMachine();
         coffeeMachine.setCash(30);
         coffeeMachine.chooseCoffee(1);
         expect(coffeeMachine.returnCash()).to.equal(20);
       });
   
-      it("coffee and equal money installed", function() {
+      it("coffee and equal money entered", function() {
         var coffeeMachine = new CoffeeMachine();
         coffeeMachine.setCash(20);
         coffeeMachine.chooseCoffee(3);
         expect(coffeeMachine.returnCash()).to.equal(0);
       });
   
-      it("coffee and small money installed", function() {
+      it("coffee and small money entered", function() {
         var coffeeMachine = new CoffeeMachine();
         coffeeMachine.setCash(15);
         coffeeMachine.chooseCoffee(3);
