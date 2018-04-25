@@ -20,7 +20,7 @@ function CoffeeMachine() {
   }
 
   this.printCoffeeMenu = function () {
-    let menu = ' ';
+    let menu = '';
     for (i in this.coffeeMenu) {
       menu += Number(i) + 1 + ' ' + this.coffeeMenu[i].price + 'Руб. ' + this.coffeeMenu[i].name + '\n';
     }

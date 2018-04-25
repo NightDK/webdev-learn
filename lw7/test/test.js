@@ -8,22 +8,52 @@ var coffeeMachine = new CoffeeMachine();
 describe("coffeeMachine", function() {
   
     describe("setCash", function() {
-      describe("invalid", function() {
-        it("number", function() {
+      describe("invalid number", function() {
+        it("negative number", function() {
           expect(coffeeMachine.setCash(-4)).to.equal(false);
         });
-        it("boolean", function() {
+        it("boolean number", function() {
           expect(coffeeMachine.setCash(false)).to.equal(false);
         });
-        it("string", function() {
+        it("zero number", function() {
+          expect(coffeeMachine.setCash(0)).to.equal(false);
+        });
+        it("string number", function() {
           expect(coffeeMachine.setCash('20')).to.equal(false);
         });
       });
-      it("valid", function() {
+      it("valid number", function() {
         expect(coffeeMachine.setCash(31)).to.equal(true);
       });
     });
   
-    
+    it("printCoffeeMenu", function() {
+      expect(coffeeMachine.printCoffeeMenu()).to.equal('1 10Руб. Американо\n2 15Руб. Латте\n3 20Руб. Каппучино\n');
+    });
   
+    describe("selectCoffee input", function() {
+      describe("invalid", function() {
+        it("string number", function() {
+          expect(coffeeMachine.chooseCoffee('1')).to.equal(false);
+        });
+        it("big number", function() {
+          expect(coffeeMachine.chooseCoffee(10)).to.equal(false);
+        });
+        it("negative number", function() {
+          expect(coffeeMachine.chooseCoffee(-2)).to.equal(false);
+        });
+        it("boolean number", function() {
+          expect(coffeeMachine.chooseCoffee(false)).to.equal(false);
+        });
+        it("zero number", function() {
+          expect(coffeeMachine.chooseCoffee(0)).to.equal(false);
+        });
+      });
+      it("valid number", function() {
+        expect(coffeeMachine.chooseCoffee(3)).to.equal(true);
+      });
+    });
+
+    
+
   });
