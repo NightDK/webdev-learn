@@ -51,6 +51,7 @@ gulpSequence(
   "html-build",
   function () {
     gulp.src('app/css/style.css').pipe(gulp.dest('build/css'));
+    gulp.src('app/js/jquery-3.2.1.min.js').pipe(gulp.dest('build/js'));
     gulp.src('app/js/check_for_error.js').pipe(gulp.dest('build/js'));
     browserSync.reload
   }
