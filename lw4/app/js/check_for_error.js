@@ -1,4 +1,4 @@
-$("#registration").submit(function (event) {
+$(".registration").submit(function (event) {
 
   event.preventDefault();
 
