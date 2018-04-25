@@ -54,6 +54,43 @@ describe("coffeeMachine", function() {
       });
     });
 
-    
+    describe("returnCash", function() {
+      it("coffee and money not installed", function() {
+        var coffeeMachine = new CoffeeMachine();
+        expect(coffeeMachine.returnCash()).to.equal(false);
+      });
+      it("coffee not installed", function() {
+        var coffeeMachine = new CoffeeMachine();
+        coffeeMachine.setCash(30);
+        expect(coffeeMachine.returnCash()).to.equal(false);
+      });
+  
+      it("money not installed", function() {
+        var coffeeMachine = new CoffeeMachine();
+        coffeeMachine.chooseCoffee(1);
+        expect(coffeeMachine.returnCash()).to.equal(false);
+      });
+  
+      it("coffee and more money installed", function() {
+        var coffeeMachine = new CoffeeMachine();
+        coffeeMachine.setCash(30);
+        coffeeMachine.chooseCoffee(1);
+        expect(coffeeMachine.returnCash()).to.equal(20);
+      });
+  
+      it("coffee and equal money installed", function() {
+        var coffeeMachine = new CoffeeMachine();
+        coffeeMachine.setCash(20);
+        coffeeMachine.chooseCoffee(3);
+        expect(coffeeMachine.returnCash()).to.equal(0);
+      });
+  
+      it("coffee and small money installed", function() {
+        var coffeeMachine = new CoffeeMachine();
+        coffeeMachine.setCash(15);
+        coffeeMachine.chooseCoffee(3);
+        expect(coffeeMachine.returnCash()).to.equal(false);
+      });
+    });
 
   });
