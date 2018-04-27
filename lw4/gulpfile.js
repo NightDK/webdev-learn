@@ -3,68 +3,70 @@ var gulp = require('gulp'),
   cssmin = require('gulp-cssmin'),
   rename = require('gulp-rename'),
   inject = require('gulp-inject'),
-  gulpSequence = require('gulp-sequence'),
-  browserSync = require('browser-sync').create(),
-  gutil = require('gulp-util');
+  browserSync = require('browser-sync'),
+  reload = browserSync.reload,
+  gutil = require('gulp-util'),
 
-gulp.task('minify-js', function () {
-  gulp.src('app/js/check_for_error.js')
+  paths = {
+    html: ['app/index.html'],
+    css: ['app/css/style.css'],
+    js: ['app/js/check_for_error.js'],
+    jQuery: ['app/js/jquery-3.2.1.min.js']
+  };
+
+gulp.task('html', function () {
+  gulp.src(paths.html)
+    .pipe(reload({ stream: true }));
+});
+
+gulp.task('css', function () {
+  gulp.src(paths.css)
+    .pipe(reload({ stream: true }))
+});
+
+gulp.task('js', function () {
+  gulp.src(paths.js)
+    .pipe(reload({ stream: true }))
+});
+
+gulp.task('js_min', function () {
+  gulp.src(paths.js)
     .pipe(uglify())
     .pipe(rename({ suffix: '.min' }))
-    .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
-    .pipe(gulp.dest('build/js'))
+    .pipe(gulp.dest('build/js/'));
 });
 
-gulp.task('minify-css', function () {
-  gulp.src('app/css/style.css')
+gulp.task('css_min', function () {
+  gulp.src(paths.css)
     .pipe(cssmin())
     .pipe(rename({ suffix: '.min' }))
-    .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
-    .pipe(gulp.dest('build/css'))
+    .pipe(gulp.dest('build/css/'))
 });
 
-gulp.task('html-build', function () {
-  gulp.src('app/*.html')
-    .pipe(gulp.dest('build/'))
-    .on('end', function () {
-      gulp.src('build/index.html')
-        .pipe(inject(gulp.src('./build/js/check_for_error.min.js', { read: false }), { relative: true }))
-        .pipe(inject(gulp.src('./build/css/style.min.css', { read: false }), { relative: true }))
-        .pipe(gulp.dest('build/'));
-    })
+gulp.task('transfer', function () {
+  gulp.src(paths.jQuery)
+    .pipe(gulp.dest('build/js'))
+  gulp.src(paths.html)
+    .pipe(gulp.dest('build'))
 });
 
-gulp.task('dev', function () {
-  gulpSequence(
-    "build"
-  )
-  browserSync.init({
+gulp.task('watcher', function () {
+  gulp.watch(paths.html, ['html']);
+  gulp.watch(paths.js, ['js']);
+  gulp.watch(paths.css, ['css']);
+});
+
+gulp.task('build', ['js_min', 'css_min', 'transfer']);
+gulp.task('dev', ['build', 'watcher', 'browserSync']);
+
+gulp.task('browserSync', function () {
+  browserSync({
     server: {
       baseDir: "./build"
-    }
+    },
+    port: 8080,
+    host: 'localhost',
+    open: true,
+    notify: false
   });
-  gulp.watch("./build/*").on('change', browserSync.reload);
-});
-
-gulp.task('build', function () {
-  function update() {
-    gulpSequence(
-      "minify-js",
-      "minify-css",
-      "html-build",
-      function () {
-        gulp.src('app/css/style.min.css').pipe(gulp.dest('build/css'));
-        gulp.src('app/js/jquery-3.2.1.min.js').pipe(gulp.dest('build/js'));
-        gulp.src('app/js/check_for_error.min.js').pipe(gulp.dest('build/js'));
-        browserSync.reload
-      }
-    )
-  }
-  browserSync.init({
-    server: {
-      baseDir: "./build"
-    }
-  });
-  update();
-  gulp.watch("./app/*").on('change', update);
 });
