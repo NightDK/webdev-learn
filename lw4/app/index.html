@@ -4,7 +4,9 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>Регистрация</title>
-  <link rel="stylesheet" href="css/style.css">
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/style.min.css">
+  <!-- endinject -->
   <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 </head>
 
@@ -13,24 +15,27 @@
     <div class="sign-page-center">
       <form class="registration">
         <div>
-          <label>"Введите E-mail</label>
+          <label>Введите E-mail</label>
           <input type="email" class="input-log">
         </div>
         <div>
-          <label>"Введите пароль</label>
+          <label>Введите пароль</label>
           <input type="password" class="input-pass">
         </div>
         <div>
-          <label>"Повторите пароль</label>
+          <label>Повторите пароль</label>
           <input type="password" class="input-pass-check">
         </div>
         <div>
           <label class="check-input">
-            <input type="checkbox" class="check"> Принимаю привила
+            Принимаю привила
+            <input type="checkbox" class="check">
           </label>
         </div>
         <input type="submit" class="sign-up" value="Зарегистрироваться">
-        <script src="js/check_for_error.js"></script>
+        <!-- inject:js -->
+        <script type="text/javascript" src="js/check_for_error.min.js"></script>
+        <!-- endinject -->
       </form>
     </div>
   </div>

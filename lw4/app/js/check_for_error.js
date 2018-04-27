@@ -5,7 +5,7 @@ $(".registration").submit(function (event) {
   var email = $(".input-log").val();
   var password = $(".input-pass").val();
   var passwordCheck = $(".input-pass-check").val();
-  var check = $(".check-input").prop("check");
+  var check = $(".check-input").prop("checked");
   var validateResult = validate(email, password, passwordCheck, check);
 
   if (validateResult == true) {
