@@ -5,52 +5,52 @@ function CoffeeMachine () {
     { name: 'Латте', price: 15 },
     { name: 'Каппучино', price: 20 }
   ]
-  this.selectCoffeeNumber = null
-}
+  this.selectCoffeeNumber = 0
 
-this.setCash = function (money) {
-  if (typeof money === 'number') {
-    if (money <= 0) {
-      console.log('error: money <= 0')
-      return false
-    }
-    this.moneyCash = money
-    return true
-  }
-  return false
-}
-
-this.printCoffeeMenu = function () {
-  let menu = ''
-  for (let i in this.coffeeMenu) {
-    menu += Number(i) + 1 + ' ' + this.coffeeMenu[i].price + 'Руб. ' + this.coffeeMenu[i].name + '\n'
-  }
-  console.log(menu)
-  return menu
-}
-
-this.chooseCoffee = function (coffeeNumber) {
-  if (typeof coffeeNumber === 'number') {
-    if (coffeeNumber >= 1 && coffeeNumber <= this.coffeeMenu.length - 1) {
-      if (this.moneyCash >= this.coffeeMenu[coffeeNumber - 1].price) {
-        console.log('choosed ' + coffeeNumber)
-        this.selectCoffeeNumber = coffeeNumber - 1
-        return true
+  this.setCash = function (money) {
+    if (typeof money === 'number') {
+      if (money <= 0) {
+        console.log('error: money <= 0')
+        return false
       }
-      console.log('Нужно больше золота!')
-      return false
+      this.moneyCash = money
+      return true
     }
-    console.log('Эй куда жмёшь? Нет такой кнопки!')
     return false
   }
-  return false
-}
 
-this.returnCash = function () {
-  if (typeof this.selectCoffeeNumber === 'number' && typeof this.moneyCash === 'number') {
-    let backMoney = this.moneyCash - this.coffeeMenu[this.selectCoffeeNumber].price
-    console.log('Ваша сдача: ' + backMoney)
-    return backMoney
+  this.printCoffeeMenu = function () {
+    let menu = ''
+    for (let i in this.coffeeMenu) {
+      menu += Number(i) + 1 + ' ' + this.coffeeMenu[i].price + 'Руб. ' + this.coffeeMenu[i].name + '\n'
+    }
+    console.log(menu)
+    return menu
   }
-  return false
+
+  this.chooseCoffee = function (coffeeNumber) {
+    if (typeof coffeeNumber === 'number') {
+      if (coffeeNumber >= 1 && coffeeNumber <= this.coffeeMenu.length - 1) {
+        if (this.moneyCash >= this.coffeeMenu[coffeeNumber - 1].price) {
+          console.log('choosed ' + coffeeNumber)
+          this.selectCoffeeNumber = coffeeNumber - 1
+          return true
+        }
+        console.log('Нужно больше золота!')
+        return false
+      }
+      console.log('Эй куда жмёшь? Нет такой кнопки!')
+      return false
+    }
+    return false
+  }
+
+  this.returnCash = function () {
+    if (typeof this.selectCoffeeNumber === 'number' && typeof this.moneyCash === 'number') {
+      let backMoney = this.moneyCash - this.coffeeMenu[this.selectCoffeeNumber].price
+      console.log('Ваша сдача: ' + backMoney)
+      return backMoney
+    }
+    return false
+  }
 }
