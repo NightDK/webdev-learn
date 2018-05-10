@@ -1,0 +1,41 @@
+.review {
+  text-decoration: none;
+  color: black;
+}
+
+.review:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.review:visited  {
+  text-decoration: none;
+  color: black;
+}
+
+h1 {
+  text-align: center;
+}
+
+.text {
+  word-wrap: break-word;
+  overflow: hidden;
+  max-width: 90%;
+  padding-right: 10px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #eee;
+  font-family: corbel;
+}
+
+.preloader {
+  margin: 0;
+  position: absolute;
+  top: 250px;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
