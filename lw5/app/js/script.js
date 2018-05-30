@@ -17,7 +17,7 @@ function getVKuser(link) {
   link = link.replace('https://vk.com/', '');
   vkApiUrl = vkApiUrl + link + tokenAndVersion;
 
-  $.getJSON({
+  $.get({
     url: vkApiUrl,
     success: function() {
       alert('this is XOPOLLIO');
@@ -26,7 +26,6 @@ function getVKuser(link) {
       alert("Ошибка");
     }
   });
-
 }
 
 $(document).ready = (function () {
