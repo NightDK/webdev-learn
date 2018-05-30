@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Product = require('../model/product');
-const Review = require('../model/review');
+const Product = require('../models/product');
+const Review = require('../models/review');
 
 const ERROR404 = {
   error: '404 Not Found'
