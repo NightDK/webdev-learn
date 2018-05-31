@@ -11,6 +11,7 @@ var gulp = require('gulp'),
     html: ['app/index.html'],
     css: ['app/css/style.css'],
     js: ['app/js/script.js'],
+	jQuery: ['app/js/jquery.min.js'],
   };
 
 gulp.task('html', function () {
@@ -45,6 +46,8 @@ gulp.task('css_min', function () {
 gulp.task('transfer', function () {
   gulp.src(paths.html)
     .pipe(gulp.dest('build'))
+  gulp.src(paths.jQuery)
+    .pipe(gulp.dest('build/js'))
 });
 
 gulp.task('watcher', function () {
