@@ -4,10 +4,10 @@ $("#link-page").submit(function (event) {
 
   var link = $(".link-input").val();
 
-  getVKuser(link);
+  getVkUser(link);
 });
 
-function getVKuser(link) {
+function getVkUser(link) {
 
   var userName = $("#info-page_name");
   var userFotoLink = $("#info-page_foto");
@@ -15,15 +15,35 @@ function getVKuser(link) {
   var tokenAndVersion = '&v=5.52&access_token=2daf8dfc2daf8dfc2daf8dfc9a2dcd7db422daf2daf8dfc76afa855d33c7bdaee783bbc';
 
   link = link.replace('https://vk.com/', '');
+
   vkApiUrl = vkApiUrl + link + tokenAndVersion;
+  
+  var linkName = link + "Name";
+  var linkPhoto = link + "Photo";
+
+  if (localStorage[linkName] != null) 
+  {
+    alert("Обновление данных о Пользователе");
+  } else {
+    alert("Добавление нового Пользователя");
+  }
 
   $.get({
     url: vkApiUrl,
-    success: function() {
-      alert('this is XOPOLLIO');
+    success: function (data) {
+      if (data.response == null) {
+        alert(data.error.error_msg);
+      } else if (data.response[0] == null) {
+        alert("Введите Ссылку");
+      } else {
+        localStorage.setItem(linkName, data.response[0].first_name + " " + data.response[0].last_name);
+        localStorage.setItem(linkPhoto, data.response[0].photo_100); 
+        userName.val(localStorage[linkName]);
+        userFotoLink.val(localStorage[linkPhoto]);
+      }
     },
-    error: function(data){
-      alert("Ошибка");
+    error: function () {
+      alert("Что-то пошло не так");
     }
   });
 }
